@@ -33,18 +33,26 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y \
           git zip unzip openjdk-17-jdk autoconf libtool pkg-config \
-          zlib1g-dev libncurses5-dev libncursesw5-dev libffi-dev libssl-dev cmake
+          zlib1g-dev libncurses5-dev libncursesw5-dev libffi-dev libssl-dev \
+          cmake build-essential libltdl-dev
 
     - name: Install Buildozer and Cython
       run: |
         python -m pip install --upgrade "pip==23.2.1"
         python -m pip install \
           "cython==0.29.36" \
-          "buildozer==1.6.0"
+          "buildozer==1.5.0"
+
+    - name: Cache Buildozer
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.buildozer
+          .buildozer
+        key: buildozer-${{ hashFiles('buildozer.spec') }}
 
     - name: Build APK with Buildozer
       run: |
-        rm -rf .buildozer
         buildozer -v android debug
 
     - name: Upload APK Artifact
@@ -52,3 +60,4 @@ jobs:
       with:
         name: package
         path: bin/*.apk
+        if-no-files-found: error
