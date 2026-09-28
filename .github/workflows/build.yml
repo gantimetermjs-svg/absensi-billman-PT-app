@@ -6,14 +6,14 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04  # Menggunakan Ubuntu versi 22.04 yang stabil untuk Buildozer
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
 
     - name: Build with Buildozer
-      uses: ArtemSBulgakov/buildozer-action@v1
+      uses: kivy/buildozer-action@master
       with:
         command: buildozer -v android debug
 
