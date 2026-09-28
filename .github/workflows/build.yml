@@ -23,6 +23,11 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
 
+    - name: Set up Swap Space
+      uses: pierotofy/set-swap-space@master
+      with:
+        swap-size-gb: 8
+
     - name: Install system dependencies
       run: |
         sudo apt-get update
