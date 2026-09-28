@@ -9,8 +9,14 @@ package.name = absensibillman
 # (str) Package domain (needed for android packaging)
 package.domain = org.billman
 
+# (str) Source where the main.py lives
+source.dir = .
+
 # (list) Source files to include (let it empty if you want to include all files)
 source.include_exts = py,png,jpg,kv,atlas
+
+# (str) Application versioning
+version = 1.0
 
 # (list) Application requirements
 requirements = python3,kivy,requests
